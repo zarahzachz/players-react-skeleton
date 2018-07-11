@@ -10,6 +10,10 @@ Build a user interface you'll want to brag about.
 The game you choose is up to you. Office Ping-Pong, soccer, football, quidditch, or professional netflix binging.
 Read all of the instructions for great success.
 
+## Pre-Requirements
+- Have Node v8+ installed on your system
+- An editor/IDE that brings you joy
+
 ## Required User Stories
 - As a user when I navigate to '/' then I should see a home page with login and registration links.
 - As a user when I navigate to '/register' then I should a registration page with fields for (first_name, last_name, email, password, confirm_password)
@@ -17,7 +21,7 @@ Read all of the instructions for great success.
 - As a user when I navigate to '/roster' then I should see the roster
 - As a user when I navigate to '/login' I should see a page where I can enter my email and password
 - As a user when I complete login I should see my player roster
-- As a user when I navigate to '/players/new' I should see a page to add a player to my roster.
+- As a user when I navigate to '/player/new' I should see a page to add a player to my roster.
 - As a user I expect that I'll see my roster with the new player after I add them.
 
 ## Optional User Stories

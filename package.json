@@ -1,5 +1,9 @@
 {
   "name": "players-react-skeleton",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zarahzachz/players-react-skeleton.git"
+  },
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -12,10 +16,12 @@
   "dependencies": {
     "babel-preset-react-app": "^3.1.1",
     "cross-env": "^5.2.0",
-    "cypress": "^3.0.2",
+    "cypress": "^3.1.5",
+    "node-sass": "^4.11.0",
     "parcel-bundler": ">=1.10.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {

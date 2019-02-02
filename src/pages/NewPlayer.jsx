@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class NewPlayer extends Component {
   constructor(props) {
@@ -10,6 +11,8 @@ export default class NewPlayer extends Component {
       handedness: 'right',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -22,9 +25,40 @@ export default class NewPlayer extends Component {
     });
   }
 
+  addPlayer(data, token) {
+    axios
+      .post('https://players-api.developer.alchemy.codes/api/players', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.statusText === 'OK') {
+          console.log('Success: ', response);
+        }
+      })
+      .catch(error => console.log('Error: ', error));
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const data = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      rating: this.state.rating,
+      handedness: this.state.handedness,
+    };
+
+    const token = localStorage.getItem('token');
+
+    this.addPlayer(data, token);
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>First name</label>
           <input

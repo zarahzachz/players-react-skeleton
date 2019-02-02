@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { registerUser } from '../api';
+import axios from 'axios';
 
 export default class Register extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ export default class Register extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.matchPasswords = this.matchPasswords.bind(this);
     this.formValidator = this.formValidator.bind(this);
-    this.createUser = this.createUser.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -49,13 +50,26 @@ export default class Register extends Component {
     } else if (this.state.password.length <= 1) {
       console.log('Please enter your password.');
       return false;
-    } else if (this.matchPasswords) {
-      console.log('Passwords do not match, please try again.');
-      return false;
     }
   }
 
-  createUser(event) {
+  registerUser(data) {
+    axios
+      .post('https://players-api.developer.alchemy.codes/api/user', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.statusText === 'OK') {
+          console.log('Success: ', response);
+          localStorage.setItem('token', response.data.token);
+        }
+      })
+      .catch(error => console.log('Error: ', error));
+  }
+
+  handleSubmit(event) {
     event.preventDefault();
 
     this.formValidator();
@@ -70,14 +84,14 @@ export default class Register extends Component {
       confirm_password: this.state.confirm_password,
     };
 
-    registerUser(data);
+    this.registerUser(data);
 
     // if successful, redirect to /roster
   }
 
   render() {
     return (
-      <form onSubmit={this.createUser}>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>First name</label>
           <input

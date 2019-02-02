@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
-import { getRoster } from '../api';
+import axios from 'axios';
 
 export default class Roster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      isLoaded: false,
       players: [],
     };
+    this.getRoster = this.getRoster.bind(this);
+  }
+
+  getRoster(token) {
+    axios
+      .get('https://players-api.developer.alchemy.codes/api/players', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          players: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
   }
 
   componentDidMount() {
-    getRoster().then(
-      (data) => {
-        this.setState({ isLoaded: true, players: data });
-      },
-      (error) => {
-        this.setState({ isLoaded: true, error });
-      },
-    );
+    const token = localStorage.getItem('token').toString();
+    this.getRoster(token);
   }
 
   render() {
-    const { error, isLoaded, players } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    }
     return (
       <ul>
-        {players.map(player => (
+        {this.state.players.map(player => (
           <li key={player.id}>
             <p>
               {player.first_name} {player.last_name}

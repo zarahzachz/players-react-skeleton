@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loginUser } from '../api';
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,7 +9,8 @@ export default class Login extends Component {
       password: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.login = this.login.bind(this);
+    this.loginUser = this.login.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -22,7 +23,23 @@ export default class Login extends Component {
     });
   }
 
-  login(event) {
+  loginUser(data) {
+    axios
+      .post('https://players-api.developer.alchemy.codes/api/login', data, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .then((response) => {
+        if (response.statusText === 'OK') {
+          console.log('Success: ', response);
+          localStorage.setItem('token', response.data.token);
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+  }
+
+  handleSubmit(event) {
     event.preventDefault();
 
     const data = {
@@ -30,7 +47,7 @@ export default class Login extends Component {
       password: this.state.password,
     };
 
-    loginUser(data);
+    this.loginUser(data);
 
     // if successful, redirect to /roster
 
@@ -39,7 +56,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.login}>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>Email address</label>
           <input

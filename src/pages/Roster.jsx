@@ -8,6 +8,7 @@ export default class Roster extends Component {
       players: [],
     };
     this.getRoster = this.getRoster.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
   }
 
   getRoster(token) {
@@ -16,13 +17,20 @@ export default class Roster extends Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        this.setState({
-          players: response.data,
-        });
+        if (response.statusText === 'OK') {
+          this.setState({
+            players: response.data.players,
+          });
+        }
       })
       .catch((error) => {
         console.log('Error: ', error);
       });
+  }
+
+  addPlayer(event) {
+    event.preventDefault();
+    this.props.history.push('/player/new');
   }
 
   componentDidMount() {
@@ -31,19 +39,24 @@ export default class Roster extends Component {
   }
 
   render() {
+    const players = this.state.players;
+
     return (
-      <ul>
-        {this.state.players.map(player => (
-          <li key={player.id}>
-            <p>
-              {player.first_name} {player.last_name}
-            </p>
-            <p>
-              {player.handedness} {player.rating}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <React.Fragment>
+        <ul>
+          {players.map(player => (
+            <li key={player.id}>
+              <p>
+                {player.first_name} {player.last_name}
+              </p>
+              <p>
+                {player.handedness} {player.rating}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <button onClick={this.addPlayer}>Add player</button>
+      </React.Fragment>
     );
   }
 }

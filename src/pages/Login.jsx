@@ -9,8 +9,14 @@ export default class Login extends Component {
       password: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.loginUser = this.login.bind(this);
+    this.loginUser = this.loginUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.goTo = this.goTo.bind(this);
+  }
+
+  goTo(event, url) {
+    event.preventDefault();
+    this.props.history.push(`/${url}`);
   }
 
   handleInputChange(event) {
@@ -25,13 +31,17 @@ export default class Login extends Component {
 
   loginUser(data) {
     axios
-      .post('https://players-api.developer.alchemy.codes/api/login', data, {
-        headers: { 'Content-Type': 'application/json' },
-      })
+      .post(
+        'https://players-api.developer.alchemy.codes/api/login',
+        JSON.stringify(data),
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
       .then((response) => {
         if (response.statusText === 'OK') {
-          console.log('Success: ', response);
           localStorage.setItem('token', response.data.token);
+          this.props.history.push('/roster');
         }
       })
       .catch((error) => {
@@ -48,10 +58,6 @@ export default class Login extends Component {
     };
 
     this.loginUser(data);
-
-    // if successful, redirect to /roster
-
-    // if error.message: Email or password not found display error
   }
 
   render() {
@@ -75,8 +81,10 @@ export default class Login extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <button type="button">Cancel</button>
-        <button type="submit">Submit</button>
+        <button type="button" onClick={event => this.goTo(event, '')}>
+          Cancel
+        </button>
+        <button type="submit">Roster</button>
       </form>
     );
   }

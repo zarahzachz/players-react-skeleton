@@ -27,15 +27,19 @@ export default class NewPlayer extends Component {
 
   addPlayer(data, token) {
     axios
-      .post('https://players-api.developer.alchemy.codes/api/players', data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+      .post(
+        'https://players-api.developer.alchemy.codes/api/players',
+        JSON.stringify(data),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
-        if (response.statusText === 'OK') {
-          console.log('Success: ', response);
+        if (response.statusTest === 'OK') {
+          this.props.history.push('/roster');
         }
       })
       .catch(error => console.log('Error: ', error));

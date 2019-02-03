@@ -18,7 +18,7 @@ export default class Roster extends Component {
   };
 
   removePlayer = id => {
-    const token = localStorage.getItem('token').toString();
+    const token = localStorage.getItem('token');
     axios
       .delete(`https://players-api.developer.alchemy.codes/api/players/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
@@ -34,7 +34,7 @@ export default class Roster extends Component {
   };
 
   componentDidMount() {
-    const token = localStorage.getItem('token').toString();
+    const token = localStorage.getItem('token');
     axios
       .get('https://players-api.developer.alchemy.codes/api/players', {
         headers: { Authorization: `Bearer ${token}` }

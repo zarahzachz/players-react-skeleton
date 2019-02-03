@@ -10,26 +10,12 @@ export default class Roster extends Component {
     this.state = {
       players: []
     };
-    this.getRoster = this.getRoster.bind(this);
-    this.addPlayer = this.addPlayer.bind(this);
   }
 
-  getRoster(token) {
-    axios
-      .get('https://players-api.developer.alchemy.codes/api/players', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(response => {
-        if (response.statusText === 'OK') {
-          this.setState({
-            players: response.data.players
-          });
-        }
-      })
-      .catch(error => {
-        console.log('Error: ', error);
-      });
-  }
+  addPlayer = event => {
+    event.preventDefault();
+    this.props.history.push('/player/new');
+  };
 
   removePlayer = id => {
     const token = localStorage.getItem('token').toString();
@@ -47,23 +33,25 @@ export default class Roster extends Component {
       });
   };
 
-  addPlayer(event) {
-    event.preventDefault();
-    this.props.history.push('/player/new');
-  }
-
-  removePlayer = event => {
-    event.preventDefault;
-    this.delete;
-  };
-
   componentDidMount() {
     const token = localStorage.getItem('token').toString();
-    this.getRoster(token);
+    axios
+      .get('https://players-api.developer.alchemy.codes/api/players', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(response => {
+        if (response.statusText === 'OK') {
+          this.setState({
+            players: response.data.players
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error: ', error.response.data.error.message);
+      });
   }
 
   render() {
-    console.log(this.state.players);
     return (
       <React.Fragment>
         <PageHeader title="Roster" />

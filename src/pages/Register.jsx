@@ -82,6 +82,15 @@ export default class Register extends Component {
   }
 
   render() {
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      confirm_password,
+    } = this.state;
+
+    console.log(first_name);
     return (
       <form onSubmit={this.handleSubmit}>
         <div>

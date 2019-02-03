@@ -59,14 +59,14 @@ export default class Login extends Component {
   };
 
   render() {
-    const data = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
 
     return (
       <LoginForm
-        data={data}
+        data={userData}
         submit={this.handleSubmit}
         change={this.handleInputChange}
       />

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import PageHeader from '../components/PageHeader';
+import PlayerList from '../components/PlayerList';
+
 export default class Roster extends Component {
   constructor(props) {
     super(props);
@@ -39,23 +42,10 @@ export default class Roster extends Component {
   }
 
   render() {
-    const players = this.state.players;
-
     return (
       <React.Fragment>
-        <h1>Roster</h1>
-        <ul>
-          {players.map(player => (
-            <li key={player.id}>
-              <p>
-                {player.first_name} {player.last_name}
-              </p>
-              <p>
-                {player.handedness} {player.rating}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <PageHeader title="Roster" />
+        <PlayerList data={this.state.players} />
         <button onClick={this.addPlayer}>Add player</button>
       </React.Fragment>
     );

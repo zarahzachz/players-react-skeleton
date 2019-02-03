@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import NewPlayerForm from '../components/NewPlayerForm';
+
 export default class NewPlayer extends Component {
   constructor(props) {
     super(props);
@@ -59,57 +61,18 @@ export default class NewPlayer extends Component {
   };
 
   render() {
+    const playerData = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      rating: this.state.rating,
+      handedness: this.state.handedness
+    };
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            required
-            name="first_name"
-            id="firstName"
-            value={this.state.first_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            required
-            name="last_name"
-            id="lastName"
-            value={this.state.last_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="rating">Rating</label>
-          <input
-            type="text"
-            required
-            name="rating"
-            id="rating"
-            value={this.state.rating}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="handedness">Handedness</label>
-          <select
-            name="handedness"
-            id="handedness"
-            value={this.state.handedness}
-            onChange={this.handleInputChange}
-          >
-            <option value="right">Right</option>
-            <option value="left">Left</option>
-          </select>
-        </div>
-        <button type="submit" id="create">
-          Create
-        </button>
-      </form>
+      <NewPlayerForm
+        data={playerData}
+        submit={this.handleSubmit}
+        change={this.handleInputChange}
+      />
     );
   }
 }

@@ -13,7 +13,9 @@ const Player = (props) => {
       <p>
         {props.rating} {props.handedness}
       </p>
-      <button onClick={removePlayer}>Remove</button>
+      <button className="delete" onClick={removePlayer}>
+        Remove
+      </button>
     </li>
   );
 };

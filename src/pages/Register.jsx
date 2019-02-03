@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import RegisterForm from '../components/RegisterForm';
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -78,71 +80,20 @@ export default class Register extends Component {
   };
 
   render() {
+    const userData = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      password: this.state.password,
+      confirm_password: this.state.confirm_password
+    };
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            required
-            name="first_name"
-            id="firstName"
-            value={this.state.first_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            required
-            name="last_name"
-            id="lastName"
-            value={this.state.last_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            required
-            name="email"
-            id="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            required
-            name="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            required
-            name="confirm_password"
-            id="confirmPassword"
-            value={this.state.confirm_password}
-            onChange={this.handleInputChange}
-          />
-          <p>{this.passwordError}</p>
-        </div>
-        <button type="submit" id="register">
-          Register
-        </button>
-        <button type="button" onClick={event => this.goTo(event, '')}>
-          Cancel
-        </button>
-      </form>
+      <RegisterForm
+        data={userData}
+        submit={this.handleSubmit}
+        change={this.handleInputChange}
+      />
     );
   }
 }

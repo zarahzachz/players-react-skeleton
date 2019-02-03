@@ -8,24 +8,22 @@ export default class NewPlayer extends Component {
       first_name: '',
       last_name: '',
       rating: '',
-      handedness: 'right',
+      handedness: 'right'
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.addPlayer = this.addPlayer.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
-  }
+  };
 
-  addPlayer(data, token) {
+  addPlayer = data => {
+    const token = localStorage.getItem('token');
     axios
       .post(
         'https://players-api.developer.alchemy.codes/api/players',
@@ -33,32 +31,32 @@ export default class NewPlayer extends Component {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
+            Authorization: `Bearer ${token}`
+          }
+        }
       )
-      .then((response) => {
+      .then(response => {
         if (response.statusTest === 'Created') {
           this.props.history.push('/roster');
         }
       })
-      .catch(error => console.log('Error: ', error));
-  }
+      .catch(error =>
+        console.log('Error: ', error.response.data.error.message)
+      );
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
 
     const data = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       rating: this.state.rating,
-      handedness: this.state.handedness,
+      handedness: this.state.handedness
     };
 
-    const token = localStorage.getItem('token');
-
-    this.addPlayer(data, token);
-  }
+    this.addPlayer(data);
+  };
 
   render() {
     return (

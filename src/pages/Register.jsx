@@ -9,63 +9,59 @@ export default class Register extends Component {
       last_name: '',
       email: '',
       password: '',
-      confirm_password: '',
+      confirm_password: ''
     };
-    this.goTo = this.goTo.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.matchPasswords = this.matchPasswords.bind(this);
-    this.formValidator = this.formValidator.bind(this);
-    this.registerUser = this.registerUser.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  goTo(event, url) {
+  goTo = (event, url) => {
     event.preventDefault();
     this.props.history.push(`/${url}`);
-  }
+  };
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
-  }
+  };
 
-  matchPasswords() {
+  matchPasswords = () => {
     const passwordError = '';
     if (this.state.password !== this.state.confirm_password) {
       return false;
     } else if (this.state.password === this.state.confirm_password) {
       return true;
     }
-  }
+  };
 
   formValidator() {}
 
-  registerUser(data) {
+  registerUser = data => {
     axios
       .post(
         'https://players-api.developer.alchemy.codes/api/user',
         JSON.stringify(data),
         {
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            'Content-Type': 'application/json'
+          }
+        }
       )
-      .then((response) => {
+      .then(response => {
         if (response.statusText === 'Created') {
           localStorage.setItem('token', response.data.token);
           this.props.history.push('/roster');
         }
       })
-      .catch(error => console.log('Error: ', error));
-  }
+      .catch(error =>
+        console.log('Error: ', error.response.data.error.message)
+      );
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
 
     this.formValidator();
@@ -75,22 +71,13 @@ export default class Register extends Component {
       last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password,
-      confirm_password: this.state.confirm_password,
+      confirm_password: this.state.confirm_password
     };
 
     this.registerUser(data);
-  }
+  };
 
   render() {
-    const {
-      first_name,
-      last_name,
-      email,
-      password,
-      confirm_password,
-    } = this.state;
-
-    console.log(first_name);
     return (
       <form onSubmit={this.handleSubmit}>
         <div>

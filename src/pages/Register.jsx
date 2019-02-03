@@ -57,7 +57,7 @@ export default class Register extends Component {
         },
       )
       .then((response) => {
-        if (response.statusText === 'OK') {
+        if (response.statusText === 'Created') {
           localStorage.setItem('token', response.data.token);
           this.props.history.push('/roster');
         }
@@ -85,57 +85,64 @@ export default class Register extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label>First name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
             required
             name="first_name"
+            id="firstName"
             value={this.state.first_name}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Last name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
             required
             name="last_name"
+            id="lastName"
             value={this.state.last_name}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Email address</label>
+          <label htmlFor="email">Email Address</label>
           <input
             type="email"
             required
             name="email"
+            id="email"
             value={this.state.email}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             required
             name="password"
+            id="password"
             value={this.state.password}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Confirm password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
             required
             name="confirm_password"
+            id="confirmPassword"
             value={this.state.confirm_password}
             onChange={this.handleInputChange}
           />
           <p>{this.passwordError}</p>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" id="register">
+          Register
+        </button>
         <button type="button" onClick={event => this.goTo(event, '')}>
           Cancel
         </button>

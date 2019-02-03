@@ -43,6 +43,7 @@ export default class Roster extends Component {
 
     return (
       <React.Fragment>
+        <h1>Roster</h1>
         <ul>
           {players.map(player => (
             <li key={player.id}>

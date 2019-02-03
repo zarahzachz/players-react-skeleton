@@ -64,19 +64,21 @@ export default class Login extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label>Email address</label>
+          <label htmlFor="email">Email Address</label>
           <input
             type="email"
             name="email"
+            id="email"
             value={this.state.email}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
+            id="password"
             value={this.state.password}
             onChange={this.handleInputChange}
           />
@@ -84,7 +86,9 @@ export default class Login extends Component {
         <button type="button" onClick={event => this.goTo(event, '')}>
           Cancel
         </button>
-        <button type="submit">Roster</button>
+        <button type="submit" id="login">
+          Log In
+        </button>
       </form>
     );
   }

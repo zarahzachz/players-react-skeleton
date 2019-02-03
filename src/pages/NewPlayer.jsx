@@ -38,7 +38,7 @@ export default class NewPlayer extends Component {
         },
       )
       .then((response) => {
-        if (response.statusTest === 'OK') {
+        if (response.statusTest === 'Created') {
           this.props.history.push('/roster');
         }
       })
@@ -64,39 +64,43 @@ export default class NewPlayer extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label>First name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
             required
             name="first_name"
+            id="firstName"
             value={this.state.first_name}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Last name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
             required
             name="last_name"
+            id="lastName"
             value={this.state.last_name}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Rating</label>
+          <label htmlFor="rating">Rating</label>
           <input
             type="text"
             required
             name="rating"
+            id="rating"
             value={this.state.rating}
             onChange={this.handleInputChange}
           />
         </div>
         <div>
-          <label>Handedness</label>
+          <label htmlFor="handedness">Handedness</label>
           <select
             name="handedness"
+            id="handedness"
             value={this.state.handedness}
             onChange={this.handleInputChange}
           >
@@ -104,7 +108,9 @@ export default class NewPlayer extends Component {
             <option value="left">Left</option>
           </select>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" id="create">
+          Create
+        </button>
       </form>
     );
   }

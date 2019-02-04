@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
@@ -46,16 +47,14 @@ const RegisterForm = props => (
       type="password"
       id="confirmPassword"
       name="confirm_password"
-      required="true"
+      required
       value={props.confirm_password}
       change={props.change}
     />
     <button type="submit" id="register">
       Register
     </button>
-    <button type="button" onClick={event => this.goTo(event, '')}>
-      Cancel
-    </button>
+    <Link to="/">Cancel</Link>
   </form>
 );
 
@@ -74,4 +73,5 @@ RegisterForm.defaultProps = {
   password: 'Pas5w0rd!',
   confirm_password: 'Pas5w0rd!',
 };
+
 export default RegisterForm;

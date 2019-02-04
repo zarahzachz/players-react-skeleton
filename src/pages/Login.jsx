@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import LoginForm from '../components/LoginForm';
@@ -9,6 +10,7 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      toRoster: false,
     };
     this.goTo = this.goTo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,9 +43,11 @@ export default class Login extends Component {
         },
       )
       .then((response) => {
-        if (response.statusText === 'OK') {
+        if (response.data.success === true) {
           localStorage.setItem('token', response.data.token);
-          this.props.history.push('/roster');
+          this.setState({
+            toRoster: true,
+          });
         }
       })
       .catch((error) => {
@@ -63,6 +67,10 @@ export default class Login extends Component {
   }
 
   render() {
+    if (this.state.toRoster === true) {
+      return <Redirect to="/roster" />;
+    }
+
     const userData = {
       email: this.state.email,
       password: this.state.password,

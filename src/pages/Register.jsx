@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import RegisterForm from '../components/RegisterForm';
@@ -11,14 +12,10 @@ export default class Register extends Component {
       last_name: '',
       email: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      toRoster: false
     };
   }
-
-  goTo = (event, url) => {
-    event.preventDefault();
-    this.props.history.push(`/${url}`);
-  };
 
   handleInputChange = event => {
     const { target } = event;
@@ -50,9 +47,11 @@ export default class Register extends Component {
         }
       )
       .then(response => {
-        if (response.statusText === 'Created') {
+        if (response.data.success === true) {
           localStorage.setItem('token', response.data.token);
-          this.props.history.push('/roster');
+          this.setState({
+            toRoster: true
+          });
         }
       })
       .catch(error =>
@@ -75,6 +74,10 @@ export default class Register extends Component {
   };
 
   render() {
+    if (this.state.toRoster === true) {
+      return <Redirect to="/roster" />;
+    }
+
     const userData = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,

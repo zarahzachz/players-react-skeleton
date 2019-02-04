@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import NewPlayerForm from '../components/NewPlayerForm';
@@ -10,7 +11,8 @@ export default class NewPlayer extends Component {
       first_name: '',
       last_name: '',
       rating: '',
-      handedness: 'right',
+      handedness: '',
+      toRoster: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
@@ -41,8 +43,10 @@ export default class NewPlayer extends Component {
         },
       )
       .then((response) => {
-        if (response.statusTest === 'Created') {
-          this.props.history.push('/roster');
+        if (response.data.success === true) {
+          this.setState({
+            toRoster: true,
+          });
         }
       })
       .catch(error =>
@@ -63,6 +67,10 @@ export default class NewPlayer extends Component {
   }
 
   render() {
+    if (this.state.toRoster === true) {
+      return <Redirect to="/roster" />;
+    }
+
     const playerData = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,

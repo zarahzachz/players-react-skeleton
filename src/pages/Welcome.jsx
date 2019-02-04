@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import PageHeader from '../components/PageHeader';
 
@@ -17,10 +18,8 @@ class Welcome extends Component {
     return (
       <div>
         <PageHeader title="Welcome" />
-        <button onClick={event => this.goTo(event, 'login')}>Login</button>
-        <button onClick={event => this.goTo(event, 'register')}>
-          Register
-        </button>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
@@ -23,9 +24,7 @@ const LoginForm = props => (
       value={props.password}
       change={props.onChange}
     />
-    <button type="button" onClick={props.goto}>
-      Cancel
-    </button>
+    <Link to="/">Cancel</Link>
     <button type="submit" id="login">
       Log In
     </button>

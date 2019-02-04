@@ -48,6 +48,7 @@ const NewPlayerForm = (props) => {
       <button type="submit" id="create">
         Create
       </button>
+      <Link to="/roster">Cancel</Link>
     </form>
   );
 };

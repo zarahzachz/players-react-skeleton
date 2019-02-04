@@ -14,6 +14,24 @@ export default class Roster extends Component {
     this.removePlayer = this.removePlayer.bind(this);
   }
 
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    axios
+      .get('https://players-api.developer.alchemy.codes/api/players', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        if (response.statusText === 'OK') {
+          this.setState({
+            players: response.data.players,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ', error.response.data.error.message);
+      });
+  }
+
   addPlayer(event) {
     event.preventDefault();
     this.props.history.push('/player/new');
@@ -29,24 +47,6 @@ export default class Roster extends Component {
         this.setState({
           players: this.state.players.filter(player => player.id !== id),
         });
-      })
-      .catch((error) => {
-        console.log('Error: ', error.response.data.error.message);
-      });
-  }
-
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-    axios
-      .get('https://players-api.developer.alchemy.codes/api/players', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        if (response.statusText === 'OK') {
-          this.setState({
-            players: response.data.players,
-          });
-        }
       })
       .catch((error) => {
         console.log('Error: ', error.response.data.error.message);

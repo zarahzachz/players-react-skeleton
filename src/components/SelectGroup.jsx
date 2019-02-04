@@ -22,14 +22,12 @@ const SelectGroup = (props) => {
 SelectGroup.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
   name: PropTypes.string,
 };
 
 SelectGroup.defaultProps = {
   id: 'defaultSelect',
   label: 'Default Select',
-  value: 'option',
   name: 'default_select',
 };
 

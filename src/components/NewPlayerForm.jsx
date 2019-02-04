@@ -1,11 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
 import SelectGroup from './SelectGroup';
 
 const NewPlayerForm = (props) => {
-  const options = ['Right', 'Left'];
+  const options = [
+    {
+      id: 1,
+      title: 'Right',
+      value: 'right',
+    },
+    {
+      id: 2,
+      title: 'Left',
+      value: 'left',
+    },
+  ];
 
   return (
     <form onSubmit={props.submit}>
@@ -57,14 +69,14 @@ NewPlayerForm.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
   rating: PropTypes.string,
-  handedness: PropTypes.oneOf(['right', 'left']),
+  handedness: PropTypes.string,
 };
 
 NewPlayerForm.defaultProps = {
   first_name: 'Eddie',
   last_name: 'Van Halen',
   rating: '11',
-  handedness: 'right',
+  handedness: 'left',
 };
 
 export default NewPlayerForm;

@@ -19,7 +19,6 @@ const NewPlayerForm = (props) => {
     },
   ];
 
-  console.log(typeof props.handedness);
   return (
     <form onSubmit={props.submit}>
       <InputGroup

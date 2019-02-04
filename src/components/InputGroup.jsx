@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const InputGroup = props => (
   <div>
@@ -11,5 +12,21 @@ const InputGroup = props => (
     />
   </div>
 );
+
+InputGroup.propTypes = {
+  id: PropTypes.string,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+InputGroup.defaultProps = {
+  id: 'defaultInput',
+  label: 'Default Input',
+  type: 'text',
+  name: 'default_input',
+  required: true,
+};
 
 export default InputGroup;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
 
@@ -23,12 +24,28 @@ const LoginForm = props => (
       change={props.change}
     />
     <button type="button" onClick={props.goto}>
-        Cancel
+      Cancel
     </button>
     <button type="submit" id="login">
-        Log In
+      Log In
     </button>
   </form>
 );
+
+LoginForm.propTypes = {
+  submit: PropTypes.func,
+  change: PropTypes.func,
+  goto: PropTypes.func,
+  email: PropTypes.string,
+  password: PropTypes.string,
+};
+
+LoginForm.defaultProps = {
+  submit: this.handleSubmit,
+  change: this.handleChange,
+  goto: this.goTo,
+  email: 'email@address.com',
+  password: 'Pas5w0rd!',
+};
 
 export default LoginForm;

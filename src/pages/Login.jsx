@@ -8,60 +8,64 @@ export default class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     };
+    this.goTo = this.goTo.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  goTo = (event, url) => {
+  goTo(event, url) {
     event.preventDefault();
     this.props.history.push(`/${url}`);
-  };
+  }
 
-  handleInputChange = event => {
+  handleInputChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+  }
 
-  loginUser = data => {
+  loginUser(data) {
     axios
       .post(
         'https://players-api.developer.alchemy.codes/api/login',
         JSON.stringify(data),
         {
-          headers: { 'Content-Type': 'application/json' }
-        }
+          headers: { 'Content-Type': 'application/json' },
+        },
       )
-      .then(response => {
+      .then((response) => {
         if (response.statusText === 'OK') {
           localStorage.setItem('token', response.data.token);
           this.props.history.push('/roster');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Error: ', error.response.data.error.message);
       });
-  };
+  }
 
-  handleSubmit = event => {
+  handleSubmit(event) {
     event.preventDefault();
 
     const data = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
 
     this.loginUser(data);
-  };
+  }
 
   render() {
     const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
 
     return (

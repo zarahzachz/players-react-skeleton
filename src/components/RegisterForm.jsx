@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
 
@@ -58,4 +59,23 @@ const RegisterForm = props => (
   </form>
 );
 
+RegisterForm.propTypes = {
+  submit: PropTypes.func,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  confirm_password: PropTypes.string,
+  change: PropTypes.func,
+};
+
+RegisterForm.defaultProps = {
+  submit: this.handleSubmit,
+  first_name: 'Jack',
+  last_name: 'Black',
+  email: 'tenacious@d.com',
+  password: 'Pas5w0rd!',
+  confirm_password: 'Pas5w0rd!',
+  change: this.handleChange,
+};
 export default RegisterForm;

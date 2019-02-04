@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SelectGroup = (props) => {
   const optionData = props.data;
@@ -16,6 +17,20 @@ const SelectGroup = (props) => {
       </select>
     </div>
   );
+};
+
+SelectGroup.propTypes = {
+  data: PropTypes.array,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+};
+
+SelectGroup.defaultProps = {
+  data: ['orange', 'banana'],
+  id: 'defaultSelect',
+  label: 'Default Select',
+  name: 'default_select',
 };
 
 export default SelectGroup;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
 import SelectGroup from './SelectGroup';
@@ -49,6 +50,24 @@ const NewPlayerForm = (props) => {
       </button>
     </form>
   );
+};
+
+NewPlayerForm.propTypes = {
+  submit: PropTypes.func,
+  change: PropTypes.func,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  rating: PropTypes.string,
+  handedness: PropTypes.oneOf(['right', 'left']),
+};
+
+NewPlayerForm.defaultProps = {
+  submit: this.handleSubmit,
+  change: this.handleChange,
+  first_name: 'Eddie',
+  last_name: 'Van Halen',
+  rating: '11',
+  handedness: 'right',
 };
 
 export default NewPlayerForm;

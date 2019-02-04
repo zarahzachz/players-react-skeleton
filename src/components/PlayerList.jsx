@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Player from './Player';
 
@@ -17,5 +18,15 @@ const PlayerList = (props) => {
   ));
   return <ul>{players}</ul>;
 };
+
+PlayerList.propTypes = {
+  data = PropTypes.array,
+  removePlayer = PropTypes.func
+}
+
+PlayerList.defaultProps = {
+  data = [{first_name: 'Tony', last_name: 'Iommi', rating: '2', handedness: 'right'}, {first_name: 'Mike', last_name: 'Albert', rating: '9', handedness: 'left'}],
+  removePlayer = this.removePlayer
+}
 
 export default PlayerList;

@@ -72,7 +72,7 @@ export default class Login extends Component {
       <LoginForm
         data={userData}
         submit={this.handleSubmit}
-        change={this.handleInputChange}
+        onChange={this.handleInputChange}
       />
     );
   }

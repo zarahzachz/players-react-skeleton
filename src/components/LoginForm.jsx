@@ -12,7 +12,7 @@ const LoginForm = props => (
       name="email"
       required="true"
       value={props.email}
-      change={props.change}
+      change={props.onChange}
     />
     <InputGroup
       label="Password"
@@ -21,7 +21,7 @@ const LoginForm = props => (
       name="password"
       required="true"
       value={props.password}
-      change={props.change}
+      change={props.onChange}
     />
     <button type="button" onClick={props.goto}>
       Cancel

@@ -9,6 +9,7 @@ const InputGroup = props => (
       name={props.name}
       required={props.required}
       id={props.id}
+      onChange={props.change}
     />
   </div>
 );

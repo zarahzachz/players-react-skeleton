@@ -19,6 +19,7 @@ const NewPlayerForm = (props) => {
     },
   ];
 
+  console.log(typeof props.handedness);
   return (
     <form onSubmit={props.submit}>
       <InputGroup
@@ -45,7 +46,7 @@ const NewPlayerForm = (props) => {
         id="rating"
         name="rating"
         required
-        value={props.rating}
+        value={props.rating.toString()}
         change={props.change}
       />
       <SelectGroup

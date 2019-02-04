@@ -11,7 +11,7 @@ export default class NewPlayer extends Component {
       first_name: '',
       last_name: '',
       rating: '',
-      handedness: '',
+      handedness: 'right',
       toRoster: false,
       errorMessage: '',
     };

@@ -36,7 +36,6 @@ export default class Register extends Component {
   }
 
   matchPasswords() {
-    const passwordError = '';
     if (this.state.password !== this.state.confirm_password) {
       return false;
     } else if (this.state.password === this.state.confirm_password) {

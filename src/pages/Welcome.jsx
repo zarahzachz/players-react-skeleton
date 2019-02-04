@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PageHeader from '../components/PageHeader';
+
 class Welcome extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,7 @@ class Welcome extends Component {
   render() {
     return (
       <div>
+        <PageHeader title="Welcome" />
         <button onClick={event => this.goTo(event, 'login')}>Login</button>
         <button onClick={event => this.goTo(event, 'register')}>
           Register

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import NewPlayerForm from '../components/NewPlayerForm';
+
 export default class NewPlayer extends Component {
   constructor(props) {
     super(props);
@@ -16,16 +18,17 @@ export default class NewPlayer extends Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
 
     this.setState({
       [name]: value,
     });
   }
 
-  addPlayer(data, token) {
+  addPlayer(data) {
+    const token = localStorage.getItem('token');
     axios
       .post(
         'https://players-api.developer.alchemy.codes/api/players',
@@ -38,11 +41,12 @@ export default class NewPlayer extends Component {
         },
       )
       .then((response) => {
-        if (response.statusTest === 'OK') {
+        if (response.statusTest === 'Created') {
           this.props.history.push('/roster');
         }
       })
-      .catch(error => console.log('Error: ', error));
+      .catch(error =>
+        console.log('Error: ', error.response.data.error.message));
   }
 
   handleSubmit(event) {
@@ -55,57 +59,23 @@ export default class NewPlayer extends Component {
       handedness: this.state.handedness,
     };
 
-    const token = localStorage.getItem('token');
-
-    this.addPlayer(data, token);
+    this.addPlayer(data);
   }
 
   render() {
+    const playerData = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      rating: this.state.rating,
+      handedness: this.state.handedness,
+    };
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>First name</label>
-          <input
-            type="text"
-            required
-            name="first_name"
-            value={this.state.first_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Last name</label>
-          <input
-            type="text"
-            required
-            name="last_name"
-            value={this.state.last_name}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Rating</label>
-          <input
-            type="text"
-            required
-            name="rating"
-            value={this.state.rating}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Handedness</label>
-          <select
-            name="handedness"
-            value={this.state.handedness}
-            onChange={this.handleInputChange}
-          >
-            <option value="right">Right</option>
-            <option value="left">Left</option>
-          </select>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <NewPlayerForm
+        data={playerData}
+        submit={this.handleSubmit}
+        change={this.handleInputChange}
+      />
     );
   }
 }

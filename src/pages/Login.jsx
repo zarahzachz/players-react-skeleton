@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import LoginForm from '../components/LoginForm';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -8,10 +10,10 @@ export default class Login extends Component {
       email: '',
       password: '',
     };
+    this.goTo = this.goTo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.goTo = this.goTo.bind(this);
   }
 
   goTo(event, url) {
@@ -20,9 +22,9 @@ export default class Login extends Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
 
     this.setState({
       [name]: value,
@@ -45,7 +47,7 @@ export default class Login extends Component {
         }
       })
       .catch((error) => {
-        console.log('Error: ', error);
+        console.log('Error: ', error.response.data.error.message);
       });
   }
 
@@ -61,31 +63,17 @@ export default class Login extends Component {
   }
 
   render() {
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>Email address</label>
-          <input
-            type="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <button type="button" onClick={event => this.goTo(event, '')}>
-          Cancel
-        </button>
-        <button type="submit">Roster</button>
-      </form>
+      <LoginForm
+        data={userData}
+        submit={this.handleSubmit}
+        change={this.handleInputChange}
+      />
     );
   }
 }

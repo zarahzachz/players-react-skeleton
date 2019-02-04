@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import PageHeader from '../components/PageHeader';
+import PlayerList from '../components/PlayerList';
+
 export default class Roster extends Component {
   constructor(props) {
     super(props);
     this.state = {
       players: [],
     };
-    this.getRoster = this.getRoster.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
+    this.removePlayer = this.removePlayer.bind(this);
   }
 
-  getRoster(token) {
+  componentDidMount() {
+    const token = localStorage.getItem('token');
     axios
       .get('https://players-api.developer.alchemy.codes/api/players', {
         headers: { Authorization: `Bearer ${token}` },
@@ -24,7 +28,7 @@ export default class Roster extends Component {
         }
       })
       .catch((error) => {
-        console.log('Error: ', error);
+        console.log('Error: ', error.response.data.error.message);
       });
   }
 
@@ -33,28 +37,30 @@ export default class Roster extends Component {
     this.props.history.push('/player/new');
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('token').toString();
-    this.getRoster(token);
+  removePlayer(id) {
+    const token = localStorage.getItem('token');
+    axios
+      .delete(`https://players-api.developer.alchemy.codes/api/players/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          players: this.state.players.filter(player => player.id !== id),
+        });
+      })
+      .catch((error) => {
+        console.log('Error: ', error.response.data.error.message);
+      });
   }
 
   render() {
-    const players = this.state.players;
-
     return (
       <React.Fragment>
-        <ul>
-          {players.map(player => (
-            <li key={player.id}>
-              <p>
-                {player.first_name} {player.last_name}
-              </p>
-              <p>
-                {player.handedness} {player.rating}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <PageHeader title="Roster" />
+        <PlayerList
+          data={this.state.players}
+          removePlayer={this.removePlayer}
+        />
         <button onClick={this.addPlayer}>Add player</button>
       </React.Fragment>
     );

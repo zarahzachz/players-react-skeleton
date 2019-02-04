@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import PageHeader from '../components/PageHeader';
@@ -9,6 +10,7 @@ export default class Roster extends Component {
     super(props);
     this.state = {
       players: [],
+      errorMessage: '',
     };
     this.addPlayer = this.addPlayer.bind(this);
     this.removePlayer = this.removePlayer.bind(this);
@@ -28,7 +30,9 @@ export default class Roster extends Component {
         }
       })
       .catch((error) => {
-        console.log('Error: ', error.response.data.error.message);
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
       });
   }
 
@@ -43,19 +47,22 @@ export default class Roster extends Component {
       .delete(`https://players-api.developer.alchemy.codes/api/players/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
+      .then(() => {
         this.setState({
           players: this.state.players.filter(player => player.id !== id),
         });
       })
       .catch((error) => {
-        console.log('Error: ', error.response.data.error.message);
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
       });
   }
 
   render() {
     return (
       <React.Fragment>
+        <p>{this.state.errorMessage}</p>
         <PageHeader title="Roster" />
         <PlayerList
           data={this.state.players}

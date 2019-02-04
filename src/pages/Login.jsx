@@ -11,6 +11,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       toRoster: false,
+      errorMessage: '',
     };
     this.goTo = this.goTo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,9 +25,9 @@ export default class Login extends Component {
   }
 
   handleInputChange(event) {
-    const target = event;
-    const value = event.target.value;
-    const name = event.target.name;
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
 
     this.setState({
       [name]: value,
@@ -51,7 +52,9 @@ export default class Login extends Component {
         }
       })
       .catch((error) => {
-        console.log('Error: ', error.response.data.error.message);
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
       });
   }
 
@@ -77,11 +80,14 @@ export default class Login extends Component {
     };
 
     return (
-      <LoginForm
-        data={userData}
-        submit={this.handleSubmit}
-        onChange={this.handleInputChange}
-      />
+      <React.Fragment>
+        <p>{this.state.errorMessage}</p>
+        <LoginForm
+          data={userData}
+          submit={this.handleSubmit}
+          onChange={this.handleInputChange}
+        />
+      </React.Fragment>
     );
   }
 }

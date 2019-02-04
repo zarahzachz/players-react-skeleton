@@ -13,6 +13,7 @@ export default class NewPlayer extends Component {
       rating: '',
       handedness: '',
       toRoster: false,
+      errorMessage: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
@@ -20,9 +21,9 @@ export default class NewPlayer extends Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const value = event.target.value;
-    const name = event.target.name;
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
 
     this.setState({
       [name]: value,
@@ -49,8 +50,11 @@ export default class NewPlayer extends Component {
           });
         }
       })
-      .catch(error =>
-        console.log('Error: ', error.response.data.error.message));
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
+      });
   }
 
   handleSubmit(event) {
@@ -79,11 +83,14 @@ export default class NewPlayer extends Component {
     };
 
     return (
-      <NewPlayerForm
-        data={playerData}
-        submit={this.handleSubmit}
-        change={this.handleInputChange}
-      />
+      <React.Fragment>
+        <p>{this.state.errorMessage}</p>
+        <NewPlayerForm
+          data={playerData}
+          submit={this.handleSubmit}
+          change={this.handleInputChange}
+        />
+      </React.Fragment>
     );
   }
 }

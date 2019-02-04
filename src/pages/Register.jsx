@@ -13,45 +13,51 @@ export default class Register extends Component {
       email: '',
       password: '',
       confirm_password: '',
-      toRoster: false
+      toRoster: false,
+      errorMessage: '',
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange = event => {
-    const target = event.target;
-    const value = event.target.value;
-    const name = event.target.name;
+  handleInputChange(event) {
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  };
+  }
 
-  registerUser = data => {
+  registerUser(data) {
     axios
       .post(
         'https://players-api.developer.alchemy.codes/api/user',
         JSON.stringify(data),
         {
           headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+            'Content-Type': 'application/json',
+          },
+        },
       )
-      .then(response => {
+      .then((response) => {
         if (response.data.success === true) {
           localStorage.setItem('token', response.data.token);
           this.setState({
-            toRoster: true
+            toRoster: true,
           });
         }
       })
-      .catch(error =>
-        console.log('Error: ', error.response.data.error.message)
-      );
-  };
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
+      });
+  }
 
-  handleSubmit = event => {
+  handleSubmit(event) {
     event.preventDefault();
 
     const data = {
@@ -59,11 +65,11 @@ export default class Register extends Component {
       last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password,
-      confirm_password: this.state.confirm_password
+      confirm_password: this.state.confirm_password,
     };
 
     this.registerUser(data);
-  };
+  }
 
   render() {
     if (this.state.toRoster === true) {
@@ -75,15 +81,18 @@ export default class Register extends Component {
       last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password,
-      confirm_password: this.state.confirm_password
+      confirm_password: this.state.confirm_password,
     };
 
     return (
-      <RegisterForm
-        data={userData}
-        submit={this.handleSubmit}
-        change={this.handleInputChange}
-      />
+      <React.Fragment>
+        <p>{this.state.errorMessage}</p>
+        <RegisterForm
+          data={userData}
+          submit={this.handleSubmit}
+          change={this.handleInputChange}
+        />
+      </React.Fragment>
     );
   }
 }

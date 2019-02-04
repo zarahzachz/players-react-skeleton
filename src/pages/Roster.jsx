@@ -21,7 +21,7 @@ export default class Roster extends Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.statusText === 'OK') {
+        if (response.data.success === true) {
           this.setState({
             players: response.data.players,
           });

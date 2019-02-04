@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
@@ -10,22 +11,20 @@ const LoginForm = props => (
       type="email"
       id="email"
       name="email"
-      required="true"
+      required
       value={props.email}
-      change={props.change}
+      change={props.onChange}
     />
     <InputGroup
       label="Password"
       type="password"
       id="password"
       name="password"
-      required="true"
+      required
       value={props.password}
-      change={props.change}
+      change={props.onChange}
     />
-    <button type="button" onClick={props.goto}>
-      Cancel
-    </button>
+    <Link to="/">Cancel</Link>
     <button type="submit" id="login">
       Log In
     </button>
@@ -35,6 +34,8 @@ const LoginForm = props => (
 LoginForm.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
+  submit: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 LoginForm.defaultProps = {

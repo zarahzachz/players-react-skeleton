@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const SelectGroup = (props) => {
   const optionData = props.data;
   const options = optionData.map(option => (
-    <option key={option.id} value={option.toLowerCase()}>
-      {option}
+    <option key={option.id} value={option.value}>
+      {option.title}
     </option>
   ));
 
@@ -20,14 +20,12 @@ const SelectGroup = (props) => {
 };
 
 SelectGroup.propTypes = {
-  data: PropTypes.array,
   id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
 };
 
 SelectGroup.defaultProps = {
-  data: ['orange', 'banana'],
   id: 'defaultSelect',
   label: 'Default Select',
   name: 'default_select',

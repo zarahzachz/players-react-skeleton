@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import LoginForm from '../components/LoginForm';
@@ -9,6 +10,8 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      toRoster: false,
+      errorMessage: '',
     };
     this.goTo = this.goTo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,13 +44,17 @@ export default class Login extends Component {
         },
       )
       .then((response) => {
-        if (response.statusText === 'OK') {
+        if (response.data.success === true) {
           localStorage.setItem('token', response.data.token);
-          this.props.history.push('/roster');
+          this.setState({
+            toRoster: true,
+          });
         }
       })
       .catch((error) => {
-        console.log('Error: ', error.response.data.error.message);
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
       });
   }
 
@@ -63,17 +70,24 @@ export default class Login extends Component {
   }
 
   render() {
+    if (this.state.toRoster === true) {
+      return <Redirect to="/roster" />;
+    }
+
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
 
     return (
-      <LoginForm
-        data={userData}
-        submit={this.handleSubmit}
-        change={this.handleInputChange}
-      />
+      <React.Fragment>
+        <p>{this.state.errorMessage}</p>
+        <LoginForm
+          data={userData}
+          submit={this.handleSubmit}
+          onChange={this.handleInputChange}
+        />
+      </React.Fragment>
     );
   }
 }

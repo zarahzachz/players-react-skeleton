@@ -1,11 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import InputGroup from './InputGroup';
 import SelectGroup from './SelectGroup';
 
 const NewPlayerForm = (props) => {
-  const options = ['Right', 'Left'];
+  const options = [
+    {
+      id: 1,
+      title: 'Right',
+      value: 'right',
+    },
+    {
+      id: 2,
+      title: 'Left',
+      value: 'left',
+    },
+  ];
 
   return (
     <form onSubmit={props.submit}>
@@ -14,7 +26,7 @@ const NewPlayerForm = (props) => {
         type="text"
         id="firstName"
         name="first_name"
-        required="true"
+        required
         value={props.first_name}
         change={props.change}
       />
@@ -23,7 +35,7 @@ const NewPlayerForm = (props) => {
         type="text"
         id="lastName"
         name="last_name"
-        required="true"
+        required
         value={props.last_name}
         change={props.change}
       />
@@ -32,8 +44,8 @@ const NewPlayerForm = (props) => {
         type="text"
         id="rating"
         name="rating"
-        required="true"
-        value={props.rating}
+        required
+        value={props.rating.toString()}
         change={props.change}
       />
       <SelectGroup
@@ -41,13 +53,14 @@ const NewPlayerForm = (props) => {
         label="Handedness"
         id="handedness"
         name="handedness"
-        required="true"
+        required
         value={props.handedness}
         change={props.change}
       />
       <button type="submit" id="create">
         Create
       </button>
+      <Link to="/roster">Cancel</Link>
     </form>
   );
 };
@@ -56,14 +69,16 @@ NewPlayerForm.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
   rating: PropTypes.string,
-  handedness: PropTypes.oneOf(['right', 'left']),
+  handedness: PropTypes.string,
+  submit: PropTypes.func,
+  change: PropTypes.func,
 };
 
 NewPlayerForm.defaultProps = {
   first_name: 'Eddie',
   last_name: 'Van Halen',
   rating: '11',
-  handedness: 'right',
+  handedness: 'left',
 };
 
 export default NewPlayerForm;

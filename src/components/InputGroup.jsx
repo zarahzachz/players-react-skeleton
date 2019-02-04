@@ -9,6 +9,7 @@ const InputGroup = props => (
       name={props.name}
       required={props.required}
       id={props.id}
+      onChange={props.change}
     />
   </div>
 );
@@ -19,6 +20,7 @@ InputGroup.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   required: PropTypes.bool,
+  change: PropTypes.func,
 };
 
 InputGroup.defaultProps = {

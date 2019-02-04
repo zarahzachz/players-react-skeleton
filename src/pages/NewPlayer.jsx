@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import NewPlayerForm from '../components/NewPlayerForm';
@@ -11,6 +12,8 @@ export default class NewPlayer extends Component {
       last_name: '',
       rating: '',
       handedness: 'right',
+      toRoster: false,
+      errorMessage: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
@@ -41,12 +44,17 @@ export default class NewPlayer extends Component {
         },
       )
       .then((response) => {
-        if (response.statusTest === 'Created') {
-          this.props.history.push('/roster');
+        if (response.data.success === true) {
+          this.setState({
+            toRoster: true,
+          });
         }
       })
-      .catch(error =>
-        console.log('Error: ', error.response.data.error.message));
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.response.data.error.message,
+        });
+      });
   }
 
   handleSubmit(event) {
@@ -63,6 +71,10 @@ export default class NewPlayer extends Component {
   }
 
   render() {
+    if (this.state.toRoster === true) {
+      return <Redirect to="/roster" />;
+    }
+
     const playerData = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -71,11 +83,14 @@ export default class NewPlayer extends Component {
     };
 
     return (
-      <NewPlayerForm
-        data={playerData}
-        submit={this.handleSubmit}
-        change={this.handleInputChange}
-      />
+      <React.Fragment>
+        <p>{this.state.errorMessage}</p>
+        <NewPlayerForm
+          data={playerData}
+          submit={this.handleSubmit}
+          change={this.handleInputChange}
+        />
+      </React.Fragment>
     );
   }
 }

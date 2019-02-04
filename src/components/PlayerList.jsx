@@ -20,13 +20,23 @@ const PlayerList = (props) => {
 };
 
 PlayerList.propTypes = {
-  data = PropTypes.array,
-  removePlayer = PropTypes.func
-}
+  data: PropTypes.array,
+  removePlayer: PropTypes.func,
+};
 
 PlayerList.defaultProps = {
-  data = [{first_name: 'Tony', last_name: 'Iommi', rating: '2', handedness: 'right'}, {first_name: 'Mike', last_name: 'Albert', rating: '9', handedness: 'left'}],
-  removePlayer = this.removePlayer
-}
+  data: [
+    {
+      first_name: 'Tony',
+      last_name: 'Iommi',
+      rating: '2',
+      handedness: 'right',
+    },
+    {
+      first_name: 'Mike', last_name: 'Albert', rating: '9', handedness: 'left',
+    },
+  ],
+  removePlayer: this.removePlayer,
+};
 
 export default PlayerList;

@@ -11,7 +11,7 @@ const RegisterForm = props => (
       type="text"
       id="firstName"
       name="first_name"
-      required="true"
+      required
       value={props.first_name}
       change={props.change}
     />
@@ -20,7 +20,7 @@ const RegisterForm = props => (
       type="text"
       id="lastName"
       name="last_name"
-      required="true"
+      required
       value={props.last_name}
       change={props.change}
     />
@@ -29,7 +29,7 @@ const RegisterForm = props => (
       type="email"
       id="email"
       name="email"
-      required="true"
+      required
       value={props.email}
       change={props.change}
     />
@@ -38,7 +38,7 @@ const RegisterForm = props => (
       type="password"
       id="password"
       name="password"
-      required="true"
+      required
       value={props.password}
       change={props.change}
     />

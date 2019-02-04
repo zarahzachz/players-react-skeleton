@@ -11,7 +11,7 @@ const LoginForm = props => (
       type="email"
       id="email"
       name="email"
-      required="true"
+      required
       value={props.email}
       change={props.onChange}
     />
@@ -20,7 +20,7 @@ const LoginForm = props => (
       type="password"
       id="password"
       name="password"
-      required="true"
+      required
       value={props.password}
       change={props.onChange}
     />

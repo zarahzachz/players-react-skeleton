@@ -14,7 +14,7 @@ const NewPlayerForm = (props) => {
         type="text"
         id="firstName"
         name="first_name"
-        required="true"
+        required
         value={props.first_name}
         change={props.change}
       />
@@ -23,7 +23,7 @@ const NewPlayerForm = (props) => {
         type="text"
         id="lastName"
         name="last_name"
-        required="true"
+        required
         value={props.last_name}
         change={props.change}
       />
@@ -32,7 +32,7 @@ const NewPlayerForm = (props) => {
         type="text"
         id="rating"
         name="rating"
-        required="true"
+        required
         value={props.rating}
         change={props.change}
       />
@@ -41,7 +41,7 @@ const NewPlayerForm = (props) => {
         label="Handedness"
         id="handedness"
         name="handedness"
-        required="true"
+        required
         value={props.handedness}
         change={props.change}
       />

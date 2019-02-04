@@ -22,7 +22,6 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  removePlayer: PropTypes.func,
   id: PropTypes.string,
   firstname: PropTypes.string,
   lastname: PropTypes.string,
@@ -31,7 +30,6 @@ Player.propTypes = {
 };
 
 Player.defaultProps = {
-  removePlayer: this.removePlayer,
   id: '123',
   firstname: 'Darrell',
   lastname: 'Abbott',

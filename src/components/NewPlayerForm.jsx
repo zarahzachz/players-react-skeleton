@@ -53,8 +53,6 @@ const NewPlayerForm = (props) => {
 };
 
 NewPlayerForm.propTypes = {
-  submit: PropTypes.func,
-  change: PropTypes.func,
   first_name: PropTypes.string,
   last_name: PropTypes.string,
   rating: PropTypes.string,
@@ -62,8 +60,6 @@ NewPlayerForm.propTypes = {
 };
 
 NewPlayerForm.defaultProps = {
-  submit: this.handleSubmit,
-  change: this.handleChange,
   first_name: 'Eddie',
   last_name: 'Van Halen',
   rating: '11',

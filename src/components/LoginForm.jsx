@@ -33,17 +33,11 @@ const LoginForm = props => (
 );
 
 LoginForm.propTypes = {
-  submit: PropTypes.func,
-  change: PropTypes.func,
-  goto: PropTypes.func,
   email: PropTypes.string,
   password: PropTypes.string,
 };
 
 LoginForm.defaultProps = {
-  submit: this.handleSubmit,
-  change: this.handleChange,
-  goto: this.goTo,
   email: 'email@address.com',
   password: 'Pas5w0rd!',
 };

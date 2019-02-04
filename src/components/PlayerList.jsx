@@ -21,6 +21,7 @@ const PlayerList = (props) => {
 
 PlayerList.propTypes = {
   data: PropTypes.array,
+  removePlayer: PropTypes.func.isRequired,
 };
 
 PlayerList.defaultProps = {

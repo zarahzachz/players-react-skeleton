@@ -70,8 +70,8 @@ NewPlayerForm.propTypes = {
   last_name: PropTypes.string,
   rating: PropTypes.string,
   handedness: PropTypes.string,
-  submit: PropTypes.func,
-  change: PropTypes.func,
+  submit: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
 };
 
 NewPlayerForm.defaultProps = {

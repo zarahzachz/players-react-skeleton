@@ -11,15 +11,18 @@ const SelectGroup = (props) => {
 
   return (
     <div>
-      <label htmlFor={props.id}>{props.label}</label>
-      <select name={props.name} id={props.id}>
-        {options}
-      </select>
+      <label htmlFor={props.id}>
+        <select name={props.name} id={props.id}>
+          {options}
+        </select>
+        {props.label}
+      </label>
     </div>
   );
 };
 
 SelectGroup.propTypes = {
+  data: PropTypes.object,
   id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,

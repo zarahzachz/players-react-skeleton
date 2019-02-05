@@ -41,7 +41,7 @@ const NewPlayerForm = (props) => {
       />
       <InputGroup
         label="Rating"
-        type="text"
+        type="number"
         id="rating"
         name="rating"
         required

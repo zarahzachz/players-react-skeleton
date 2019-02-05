@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import Login from './Login';
 import NewPlayer from './NewPlayer';
@@ -10,19 +10,30 @@ import Roster from './Roster';
 import Welcome from './Welcome';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    font-size: 18px;
+  }
+
   body {
     background: midnightblue;
     background-image: linear-gradient(65deg, midnightblue, black);
     background-repeat: no-repeat;
     background-size: cover;
+    box-sizing: border-box;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 1rem;
   }
 `;
 
+const Container = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 100px;
+`;
+
 const App = () => (
-  <React.Fragment>
+  <Container>
     <GlobalStyle />
     <BrowserRouter>
       <Switch>
@@ -34,7 +45,7 @@ const App = () => (
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
-  </React.Fragment>
+  </Container>
 );
 
 export default App;

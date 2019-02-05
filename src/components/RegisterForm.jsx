@@ -64,6 +64,8 @@ RegisterForm.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   confirm_password: PropTypes.string,
+  submit: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
 };
 
 RegisterForm.defaultProps = {

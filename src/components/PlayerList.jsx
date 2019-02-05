@@ -20,7 +20,13 @@ const PlayerList = (props) => {
 };
 
 PlayerList.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    rating: PropTypes.string,
+    handedness: PropTypes.string,
+  })),
+  removePlayer: PropTypes.func.isRequired,
 };
 
 PlayerList.defaultProps = {
@@ -30,12 +36,6 @@ PlayerList.defaultProps = {
       last_name: 'Iommi',
       rating: '2',
       handedness: 'right',
-    },
-    {
-      first_name: 'Mike',
-      last_name: 'Albert',
-      rating: '9',
-      handedness: 'left',
     },
   ],
 };

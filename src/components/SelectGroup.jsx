@@ -11,21 +11,29 @@ const SelectGroup = (props) => {
 
   return (
     <div>
-      <label htmlFor={props.id}>{props.label}</label>
-      <select name={props.name} id={props.id}>
-        {options}
-      </select>
+      <label htmlFor={props.id}>
+        {props.label}
+        <select name={props.name} id={props.id}>
+          {options}
+        </select>
+      </label>
     </div>
   );
 };
 
 SelectGroup.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    value: PropTypes.string,
+  })),
   id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
 };
 
 SelectGroup.defaultProps = {
+  data: [{ id: 1, title: 'Title', value: 'value' }],
   id: 'defaultSelect',
   label: 'Default Select',
   name: 'default_select',

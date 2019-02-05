@@ -34,8 +34,8 @@ const LoginForm = props => (
 LoginForm.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
-  submit: PropTypes.func,
-  onChange: PropTypes.func,
+  submit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 LoginForm.defaultProps = {

@@ -22,13 +22,18 @@ const SelectGroup = (props) => {
 };
 
 SelectGroup.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    value: PropTypes.string,
+  })),
   id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
 };
 
 SelectGroup.defaultProps = {
+  data: [{ id: 1, title: 'Title', value: 'value' }],
   id: 'defaultSelect',
   label: 'Default Select',
   name: 'default_select',

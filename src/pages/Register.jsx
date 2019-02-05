@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import PageHeader from '../components/PageHeader';
+import ErrorMessage from '../components/ErrorMessage';
 import RegisterForm from '../components/RegisterForm';
 
 export default class Register extends Component {
@@ -86,7 +88,8 @@ export default class Register extends Component {
 
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        <PageHeader title="Register an account" />
+        <ErrorMessage error={this.state.errorMessage} />
         <RegisterForm
           data={userData}
           submit={this.handleSubmit}

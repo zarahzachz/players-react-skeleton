@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import PageHeader from '../components/PageHeader';
+import ErrorMessage from '../components/ErrorMessage';
 import LoginForm from '../components/LoginForm';
 
 export default class Login extends Component {
@@ -75,7 +77,8 @@ export default class Login extends Component {
 
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        <PageHeader title="Log in" />
+        <ErrorMessage error={this.state.errorMessage} />
         <LoginForm
           data={userData}
           submit={this.handleSubmit}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const InputGroup = props => (
   <div>
     <label htmlFor={props.id}>
+      {props.label}
       <input
         type={props.type}
         name={props.name}
@@ -11,7 +12,6 @@ const InputGroup = props => (
         id={props.id}
         onChange={props.change}
       />
-      {props.label}
     </label>
   </div>
 );

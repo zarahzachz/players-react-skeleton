@@ -12,10 +12,10 @@ const SelectGroup = (props) => {
   return (
     <div>
       <label htmlFor={props.id}>
+        {props.label}
         <select name={props.name} id={props.id}>
           {options}
         </select>
-        {props.label}
       </label>
     </div>
   );

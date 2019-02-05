@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import PageHeader from '../components/PageHeader';
@@ -12,7 +12,6 @@ export default class Roster extends Component {
       players: [],
       errorMessage: '',
     };
-    this.addPlayer = this.addPlayer.bind(this);
     this.removePlayer = this.removePlayer.bind(this);
   }
 
@@ -34,11 +33,6 @@ export default class Roster extends Component {
           errorMessage: error.response.data.error.message,
         });
       });
-  }
-
-  addPlayer(event) {
-    event.preventDefault();
-    this.props.history.push('/player/new');
   }
 
   removePlayer(id) {
@@ -68,7 +62,7 @@ export default class Roster extends Component {
           data={this.state.players}
           removePlayer={this.removePlayer}
         />
-        <button onClick={this.addPlayer}>Add player</button>
+        <Link to="/player/new">Add player</Link>
       </React.Fragment>
     );
   }

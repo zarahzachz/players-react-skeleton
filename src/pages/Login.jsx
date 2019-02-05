@@ -13,15 +13,9 @@ export default class Login extends Component {
       toRoster: false,
       errorMessage: '',
     };
-    this.goTo = this.goTo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  goTo(event, url) {
-    event.preventDefault();
-    this.props.history.push(`/${url}`);
   }
 
   handleInputChange(event) {

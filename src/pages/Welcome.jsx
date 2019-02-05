@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import styles from '../styles';
 
-const Container = styled.div`
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-gap: 2.75rem;
-`;
-
 const DisplayText = styled.div`
   color: white;
   display: flex;
@@ -48,6 +42,15 @@ const DisplayText = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  display: grid;
+  grid-gap: 16px;
+
+  @media screen and (min-width: ${styles.screen.mobile}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
 const Button = styled(Link)`
   background-color: ${props =>
     (props.ghost ? 'transparent' : 'mediumslateblue')};
@@ -64,17 +67,8 @@ const Button = styled(Link)`
   justify-content: center;
 `;
 
-const ButtonWrapper = styled.div`
-  display: grid;
-  grid-gap: 16px;
-
-  @media screen and (min-width: ${styles.screen.mobile}) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
 const Welcome = () => (
-  <Container>
+  <React.Fragment>
     <DisplayText>
       <h1>Air Guitar</h1> <span>World Championship</span>
     </DisplayText>
@@ -84,7 +78,7 @@ const Welcome = () => (
       </Button>
       <Button to="/register">Register</Button>
     </ButtonWrapper>
-  </Container>
+  </React.Fragment>
 );
 
 export default Welcome;

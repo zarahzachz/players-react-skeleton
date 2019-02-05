@@ -14,14 +14,17 @@ const GlobalStyle = createGlobalStyle`
     font-size: 18px;
   }
 
+  html, body {
+    box-sizing: border-box;
+    min-height: 100%;
+    margin: 0;
+  }
+
   body {
     background: midnightblue;
     background-image: linear-gradient(65deg, midnightblue, black);
     background-repeat: no-repeat;
     background-size: cover;
-    box-sizing: border-box;
-    height: 100%;
-    margin: 0;
     padding: 1rem;
   }
 `;
@@ -32,19 +35,26 @@ const Container = styled.div`
   padding-top: 100px;
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 2.75rem;
+`;
+
 const App = () => (
   <Container>
-    <GlobalStyle />
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Welcome} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route path="/roster" component={Roster} />
-        <Route path="/player/new" component={NewPlayer} />
-        <Route component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+    <Grid>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Welcome} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/roster" component={Roster} />
+          <Route path="/player/new" component={NewPlayer} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </Grid>
   </Container>
 );
 

@@ -8,7 +8,7 @@ import App from './pages/App';
 
 WebFont.load({
   google: {
-    families: ['New Rocker', 'Cinzel', 'Lato'],
+    families: ['New Rocker', 'Cinzel'],
   },
 });
 

@@ -1,8 +1,7 @@
 const styles = {
   font: {
-    base: 'Lato, sans-serif',
-    header: 'Cinzel, serif',
-    display: 'New Rocker, cursive',
+    base: 'Cinzel, serif',
+    header: 'New Rocker, cursive',
   },
   screen: {
     mobile: '600px',

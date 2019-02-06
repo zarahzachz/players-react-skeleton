@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
+import styles from '../styles';
 
 import Login from './Login';
 import NewPlayer from './NewPlayer';
@@ -25,6 +26,8 @@ const GlobalStyle = createGlobalStyle`
     background-image: linear-gradient(65deg, midnightblue, black);
     background-repeat: no-repeat;
     background-size: cover;
+    color: white;
+    font-family: ${styles.font.base};
     padding: 1rem;
   }
 `;

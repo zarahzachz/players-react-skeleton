@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import styles from '../styles';
 
 const Field = styled.div`
-  font-family: ${styles.font.base};
-
   label {
     color: rgba(255, 255, 255, 0.8);
     display: flex;

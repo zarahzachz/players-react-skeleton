@@ -1,7 +1,5 @@
 # Alchemy React Test
 
-Project demo link: https://flamboyant-tesla-86aeed.netlify.com
-
 ## Background
 The engineering team at Alchemy has built an (imaginary) game management platform.
 The platform has an API that allows you to create a manager(user) that allows them

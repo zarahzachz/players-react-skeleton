@@ -14,6 +14,7 @@ export default class Login extends Component {
       password: '',
       toRoster: false,
       errorMessage: '',
+      hasError: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
@@ -50,6 +51,7 @@ export default class Login extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -75,10 +77,15 @@ export default class Login extends Component {
       password: this.state.password,
     };
 
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
+
     return (
       <React.Fragment>
-        <PageHeader title="Log in" />
-        <ErrorMessage error={this.state.errorMessage} />
+        <PageHeader title="Sign In" />
+        {error}
         <LoginForm
           data={userData}
           submit={this.handleSubmit}

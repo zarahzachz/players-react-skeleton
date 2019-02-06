@@ -17,6 +17,7 @@ export default class Register extends Component {
       confirm_password: '',
       toRoster: false,
       errorMessage: '',
+      hasError: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.registerUser = this.registerUser.bind(this);
@@ -55,6 +56,7 @@ export default class Register extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -86,10 +88,15 @@ export default class Register extends Component {
       confirm_password: this.state.confirm_password,
     };
 
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
+
     return (
       <React.Fragment>
-        <PageHeader title="Register an account" />
-        <ErrorMessage error={this.state.errorMessage} />
+        <PageHeader title="Create an Account" />
+        {error}
         <RegisterForm
           data={userData}
           submit={this.handleSubmit}

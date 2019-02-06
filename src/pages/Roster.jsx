@@ -11,6 +11,7 @@ export default class Roster extends Component {
     this.state = {
       players: [],
       errorMessage: '',
+      hasError: false,
     };
     this.removePlayer = this.removePlayer.bind(this);
   }
@@ -31,6 +32,7 @@ export default class Roster extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -54,15 +56,19 @@ export default class Roster extends Component {
   }
 
   render() {
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        {error}
         <PageHeader title="Roster" />
         <PlayerList
           data={this.state.players}
           removePlayer={this.removePlayer}
         />
-        <Link to="/player/new">Add player</Link>
+        <Link to="/player/new">Add Competitor</Link>
       </React.Fragment>
     );
   }

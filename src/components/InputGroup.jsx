@@ -19,6 +19,7 @@ const Field = styled.div`
     font-size: 1rem;
     height: 2rem;
     margin-top: 0.5rem;
+    width: 100%;
   }
 `;
 

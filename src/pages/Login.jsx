@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import PageHeader from '../components/PageHeader';
+import ErrorMessage from '../components/ErrorMessage';
 import LoginForm from '../components/LoginForm';
 
 export default class Login extends Component {
@@ -12,6 +14,7 @@ export default class Login extends Component {
       password: '',
       toRoster: false,
       errorMessage: '',
+      hasError: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
@@ -48,6 +51,7 @@ export default class Login extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -73,9 +77,15 @@ export default class Login extends Component {
       password: this.state.password,
     };
 
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
+
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        <PageHeader title="Sign In" />
+        {error}
         <LoginForm
           data={userData}
           submit={this.handleSubmit}

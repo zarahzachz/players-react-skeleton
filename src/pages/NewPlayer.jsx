@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import ErrorMessage from '../components/ErrorMessage';
+import PageHeader from '../components/PageHeader';
 import NewPlayerForm from '../components/NewPlayerForm';
 
 export default class NewPlayer extends Component {
@@ -14,6 +16,7 @@ export default class NewPlayer extends Component {
       handedness: 'right',
       toRoster: false,
       errorMessage: '',
+      hasError: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
@@ -53,6 +56,7 @@ export default class NewPlayer extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -82,9 +86,15 @@ export default class NewPlayer extends Component {
       handedness: this.state.handedness,
     };
 
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
+
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        <PageHeader title="Add a Competitor" />
+        {error}
         <NewPlayerForm
           data={playerData}
           submit={this.handleSubmit}

@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 
+import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/PageHeader';
 import PlayerList from '../components/PlayerList';
+
+const Button = styled(Link)`
+  background-color: mediumslateblue;
+  border: 1px solid mediumslateblue;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+`;
 
 export default class Roster extends Component {
   constructor(props) {
@@ -11,6 +27,7 @@ export default class Roster extends Component {
     this.state = {
       players: [],
       errorMessage: '',
+      hasError: false,
     };
     this.removePlayer = this.removePlayer.bind(this);
   }
@@ -31,6 +48,7 @@ export default class Roster extends Component {
       .catch((error) => {
         this.setState({
           errorMessage: error.response.data.error.message,
+          hasError: true,
         });
       });
   }
@@ -54,15 +72,19 @@ export default class Roster extends Component {
   }
 
   render() {
+    let error;
+    if (this.state.hasError === true) {
+      error = <ErrorMessage error={this.state.errorMessage} />;
+    }
     return (
       <React.Fragment>
-        <p>{this.state.errorMessage}</p>
+        {error}
         <PageHeader title="Roster" />
         <PlayerList
           data={this.state.players}
           removePlayer={this.removePlayer}
         />
-        <Link to="/player/new">Add player</Link>
+        <Button to="/player/new">Add Competitor</Button>
       </React.Fragment>
     );
   }

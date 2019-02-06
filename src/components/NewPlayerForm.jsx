@@ -90,11 +90,11 @@ const NewPlayerForm = (props) => {
         <FieldsRow>
           <InputGroup
             label="Rating"
-            type="number"
+            type="text"
             id="rating"
             name="rating"
             required
-            value={props.rating.toString()}
+            value={props.rating}
             change={props.change}
           />
           <SelectGroup

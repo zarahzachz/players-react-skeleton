@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import styles from '../styles';
 
+import image from '../assets/images/headbanging.gif';
+
 const DisplayText = styled.div`
-  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,18 +22,16 @@ const DisplayText = styled.div`
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: ${styles.font.display};
+    font-family: ${styles.font.header};
     font-size: 2.75rem;
     margin: 0;
-    text-transform: uppercase;
 
     @media screen and (min-width: ${styles.screen.mobile}) {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
     }
   }
 
   span {
-    font-family: ${styles.font.header};
     font-size: 1.25rem;
     text-transform: uppercase;
 
@@ -40,6 +39,10 @@ const DisplayText = styled.div`
       font-size: 1.5rem;
     }
   }
+`;
+
+const Image = styled.img`
+  margin: 0 auto;
 `;
 
 const ButtonWrapper = styled.div`
@@ -56,15 +59,14 @@ const Button = styled(Link)`
     (props.ghost ? 'transparent' : 'mediumslateblue')};
   border: 1px solid mediumslateblue;
   color: white;
-  font-family: ${styles.font.base};
-  text-decoration: none;
-  text-transform: uppercase;
   font-size: 1rem;
-  padding: 1rem 1.5rem;
   line-height: 1;
   display: flex;
   align-items: center;
+  padding: 1rem 1.5rem;
   justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
 `;
 
 const Welcome = () => (
@@ -72,6 +74,7 @@ const Welcome = () => (
     <DisplayText>
       <h1>Air Guitar</h1> <span>World Championship</span>
     </DisplayText>
+    <Image src={image} alt="Handbanging, courtesy of Metalocalypse" />
     <ButtonWrapper>
       <Button ghost="true" to="/login">
         Login

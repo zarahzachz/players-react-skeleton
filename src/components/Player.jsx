@@ -46,7 +46,7 @@ Player.propTypes = {
   id: PropTypes.string,
   firstname: PropTypes.string,
   lastname: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   handedness: PropTypes.oneOf(['right', 'left']),
   removePlayer: PropTypes.func.isRequired,
 };
@@ -55,7 +55,7 @@ Player.defaultProps = {
   id: '123',
   firstname: 'Darrell',
   lastname: 'Abbott',
-  rating: '4',
+  rating: 4,
   handedness: 'left',
 };
 

@@ -76,6 +76,7 @@ export default class Roster extends Component {
     if (this.state.hasError === true) {
       error = <ErrorMessage error={this.state.errorMessage} />;
     }
+
     return (
       <React.Fragment>
         {error}

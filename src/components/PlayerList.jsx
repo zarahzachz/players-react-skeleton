@@ -67,7 +67,7 @@ PlayerList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     first_name: PropTypes.string,
     last_name: PropTypes.string,
-    rating: PropTypes.string,
+    rating: PropTypes.number,
     handedness: PropTypes.string,
   })),
   removePlayer: PropTypes.func.isRequired,
@@ -78,7 +78,7 @@ PlayerList.defaultProps = {
     {
       first_name: 'Tony',
       last_name: 'Iommi',
-      rating: '2',
+      rating: 2,
       handedness: 'right',
     },
   ],

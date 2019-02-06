@@ -90,7 +90,7 @@ const NewPlayerForm = (props) => {
         <FieldsRow>
           <InputGroup
             label="Rating"
-            type="text"
+            type="number"
             id="rating"
             name="rating"
             required
@@ -123,7 +123,7 @@ const NewPlayerForm = (props) => {
 NewPlayerForm.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   handedness: PropTypes.string,
   submit: PropTypes.func.isRequired,
   change: PropTypes.func.isRequired,
@@ -132,7 +132,7 @@ NewPlayerForm.propTypes = {
 NewPlayerForm.defaultProps = {
   first_name: 'Eddie',
   last_name: 'Van Halen',
-  rating: '11',
+  rating: 11,
   handedness: 'left',
 };
 

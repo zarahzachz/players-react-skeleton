@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 
+import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/PageHeader';
 import PlayerList from '../components/PlayerList';
+
+const Button = styled(Link)`
+  background-color: mediumslateblue;
+  border: 1px solid mediumslateblue;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+`;
 
 export default class Roster extends Component {
   constructor(props) {
@@ -68,7 +84,7 @@ export default class Roster extends Component {
           data={this.state.players}
           removePlayer={this.removePlayer}
         />
-        <Link to="/player/new">Add Competitor</Link>
+        <Button to="/player/new">Add Competitor</Button>
       </React.Fragment>
     );
   }

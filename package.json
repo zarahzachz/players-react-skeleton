@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development parcel src/index.html -p 3000",
-    "build": "cross-env NODE_ENV=production parcel build index.html --public-url",
+    "build": "cross-env NODE_ENV=production parcel build index.html ./dist/index.html",
     "e2e": "cypress open",
     "lint:js": "eslint src/**/**/*.js src/**/**/*.jsx tests/**/**/*.js",
     "lint:style": "stylelint src/**/**/*.css src/**/**/*.scss"
@@ -36,6 +36,7 @@
     "eslint-plugin-react": "^7.9.1",
     "prettier": "^1.13.5",
     "prettierrc": "0.0.0-5",
+    "sass": "^1.17.0",
     "stylelint": "^9.3.0",
     "stylelint-config-standard": "^18.2.0"
   }

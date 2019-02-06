@@ -1,16 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import styles from '../styles';
 
 const Err = styled.p`
-  color: white;
   background-color: darkmagenta;
-  font-family: ${styles.font.base};
   font-size: 1rem;
   margin: 0;
   padding: 1rem;
 `;
 
-const ErrorMessage = props => <Err>{props.error}.</Err>;
+const ErrorMessage = props => <Err>{props.error}</Err>;
+
+ErrorMessage.propTypes = {
+  error: PropTypes.string,
+};
+
+ErrorMessage.defaultProps = {
+  error: 'This is an error.',
+};
 
 export default ErrorMessage;

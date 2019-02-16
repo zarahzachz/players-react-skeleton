@@ -21,6 +21,13 @@
 			"rating": 8000,
 			"handedness": "left",
 			"id": "5b24de63310d217ff39012c3"
+		},
+		{
+			"first_name": "Tom",
+			"last_name": "Riddle",
+			"rating": 10,
+			"handedness": "right",
+			"id": "5b24deb1310d217ff39012c4"
 		}
 	]
 }

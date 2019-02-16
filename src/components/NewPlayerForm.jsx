@@ -133,7 +133,7 @@ NewPlayerForm.defaultProps = {
   first_name: 'Eddie',
   last_name: 'Van Halen',
   rating: 11,
-  handedness: 'left',
+  handedness: 'right',
 };
 
 export default NewPlayerForm;

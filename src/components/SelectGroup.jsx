@@ -82,7 +82,7 @@ SelectGroup.propTypes = {
   })),
   id: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   name: PropTypes.string,
   change: PropTypes.func.isRequired,
 };
@@ -91,7 +91,6 @@ SelectGroup.defaultProps = {
   data: [{ id: 1, title: 'Title', value: 'value' }],
   id: 'defaultSelect',
   label: 'Default Select',
-  value: 'value',
   name: 'default_select',
 };
 

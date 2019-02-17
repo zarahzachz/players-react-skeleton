@@ -11,7 +11,7 @@ describe('Add player page', () => {
     cy.route(
       'GET',
       'https://players-api.developer.alchemy.codes/api/players',
-      'fixture:getPlayers.json',
+      'fixture:getPlayersCreated.json',
     );
   });
 
@@ -23,7 +23,7 @@ describe('Add player page', () => {
     cy.contains('Handedness');
   });
 
-  it('Accepts valid email and password', () => {
+  it('Will create a player', () => {
     cy.visit('/player/new');
     cy.get('#firstName').type('Tom');
     cy.get('#lastName').type('Riddle');

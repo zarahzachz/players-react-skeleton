@@ -61,7 +61,12 @@ const SelectGroup = (props) => {
     <Field>
       <label htmlFor={props.id}>
         {props.label}
-        <select name={props.name} id={props.id}>
+        <select
+          name={props.name}
+          id={props.id}
+          value={props.value}
+          onChange={props.change}
+        >
           {options}
         </select>
       </label>
@@ -77,7 +82,9 @@ SelectGroup.propTypes = {
   })),
   id: PropTypes.string,
   label: PropTypes.string,
+  value: PropTypes.string.isRequired,
   name: PropTypes.string,
+  change: PropTypes.func.isRequired,
 };
 
 SelectGroup.defaultProps = {

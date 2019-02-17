@@ -124,7 +124,7 @@ NewPlayerForm.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
   rating: PropTypes.number,
-  handedness: PropTypes.string,
+  handedness: PropTypes.string.isRequired,
   submit: PropTypes.func.isRequired,
   change: PropTypes.func.isRequired,
 };
@@ -133,7 +133,6 @@ NewPlayerForm.defaultProps = {
   first_name: 'Eddie',
   last_name: 'Van Halen',
   rating: 11,
-  handedness: 'left',
 };
 
 export default NewPlayerForm;
